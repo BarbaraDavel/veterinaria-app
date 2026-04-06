@@ -225,11 +225,11 @@ body {
 }
 
 .doc-logo-box {
-  width: 150px;
-  height: 110px;
+  width: 200px;
+  height: 130px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -238,8 +238,8 @@ body {
 }
 
 .doc-logo {
-  max-width: 140px;
-  max-height: 100px;
+  max-width: 190px;
+  max-height: 120px;
   width: auto;
   height: auto;
   object-fit: contain;
