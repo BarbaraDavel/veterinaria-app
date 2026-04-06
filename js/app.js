@@ -26,45 +26,41 @@ function obtenerNombreBaseArchivo() {
   return `documento-veterinario-${nombreLimpio}-${obtenerFechaArchivo()}`;
 }
 
-function actualizarVista() {
-  const duenioInput = document.getElementById("duenio");
-  const mascotaInput = document.getElementById("mascota");
-  const diagnosticoInput = document.getElementById("diagnostico");
-  const tratamientoInput = document.getElementById("tratamiento");
-
-  const docDuenio = document.getElementById("doc-duenio");
-  const docMascota = document.getElementById("doc-mascota");
-  const docDiagnostico = document.getElementById("doc-diagnostico");
-  const docTratamiento = document.getElementById("doc-tratamiento");
-
-  if (duenioInput && docDuenio) {
-    docDuenio.innerText = textoOPlaceholder(duenioInput.value);
-  }
-
-  if (mascotaInput && docMascota) {
-    docMascota.innerText = textoOPlaceholder(mascotaInput.value);
-  }
-
-  if (diagnosticoInput && docDiagnostico) {
-    docDiagnostico.innerText = textoOPlaceholder(diagnosticoInput.value);
-  }
-
-  if (tratamientoInput && docTratamiento) {
-    docTratamiento.innerText = textoOPlaceholder(tratamientoInput.value);
-  }
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = value;
 }
 
-async function capturarDocumento() {
-  const elemento = document.getElementById("documento");
+function actualizarVista() {
+  const duenio = textoOPlaceholder(document.getElementById("duenio")?.value || "");
+  const mascota = textoOPlaceholder(document.getElementById("mascota")?.value || "");
+  const diagnostico = textoOPlaceholder(document.getElementById("diagnostico")?.value || "");
+  const tratamiento = textoOPlaceholder(document.getElementById("tratamiento")?.value || "");
+
+  setText("doc-duenio", duenio);
+  setText("doc-mascota", mascota);
+  setText("doc-diagnostico", diagnostico);
+  setText("doc-tratamiento", tratamiento);
+
+  setText("export-duenio", duenio);
+  setText("export-mascota", mascota);
+  setText("export-diagnostico", diagnostico);
+  setText("export-tratamiento", tratamiento);
+}
+
+async function capturarDocumentoExport() {
+  const elemento = document.getElementById("documentoExport");
 
   if (!elemento) {
-    throw new Error("No se encontró el elemento #documento");
+    throw new Error("No se encontró el elemento #documentoExport");
   }
 
   return await html2canvas(elemento, {
     scale: 2,
     useCORS: true,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    width: 794,
+    windowWidth: 794
   });
 }
 
@@ -76,31 +72,29 @@ async function generarPDF() {
     }
 
     const { jsPDF } = window.jspdf;
-    const canvas = await capturarDocumento();
+    const canvas = await capturarDocumentoExport();
     const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF("p", "mm", "a4");
-
     const pageWidth = 210;
     const pageHeight = 297;
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const margin = 8;
+    const usableWidth = pageWidth - margin * 2;
+    const usableHeight = pageHeight - margin * 2;
 
-    let finalWidth = imgWidth;
-    let finalHeight = imgHeight;
-    let posX = 0;
-    let posY = 0;
+    let imgWidth = usableWidth;
+    let imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    if (imgHeight > pageHeight) {
-      finalHeight = pageHeight;
-      finalWidth = (canvas.width * finalHeight) / canvas.height;
-      posX = (pageWidth - finalWidth) / 2;
-    } else {
-      posY = (pageHeight - finalHeight) / 2;
+    if (imgHeight > usableHeight) {
+      imgHeight = usableHeight;
+      imgWidth = (canvas.width * imgHeight) / canvas.height;
     }
 
-    pdf.addImage(imgData, "PNG", posX, posY, finalWidth, finalHeight);
+    const x = (pageWidth - imgWidth) / 2;
+    const y = 8;
+
+    pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
     pdf.save(`${obtenerNombreBaseArchivo()}.pdf`);
   } catch (error) {
     console.error("Error al generar PDF:", error);
@@ -110,7 +104,7 @@ async function generarPDF() {
 
 async function descargarImagen() {
   try {
-    const canvas = await capturarDocumento();
+    const canvas = await capturarDocumentoExport();
     const link = document.createElement("a");
     link.download = `${obtenerNombreBaseArchivo()}.png`;
     link.href = canvas.toDataURL("image/png");
@@ -123,7 +117,7 @@ async function descargarImagen() {
 
 async function compartir() {
   try {
-    const canvas = await capturarDocumento();
+    const canvas = await capturarDocumentoExport();
 
     canvas.toBlob(async (blob) => {
       if (!blob) {
@@ -144,9 +138,7 @@ async function compartir() {
           files: [archivo]
         });
       } else {
-        alert(
-          "Tu dispositivo o navegador no permite compartir el archivo directamente. Se descargará la imagen."
-        );
+        alert("Tu dispositivo o navegador no permite compartir el archivo directamente. Se descargará la imagen.");
         const link = document.createElement("a");
         link.download = archivo.name;
         link.href = URL.createObjectURL(blob);
@@ -168,17 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCompartir = document.getElementById("btnCompartir");
   const btnImagen = document.getElementById("btnImagen");
 
-  if (btnPdf) {
-    btnPdf.addEventListener("click", generarPDF);
-  }
-
-  if (btnCompartir) {
-    btnCompartir.addEventListener("click", compartir);
-  }
-
-  if (btnImagen) {
-    btnImagen.addEventListener("click", descargarImagen);
-  }
+  if (btnPdf) btnPdf.addEventListener("click", generarPDF);
+  if (btnCompartir) btnCompartir.addEventListener("click", compartir);
+  if (btnImagen) btnImagen.addEventListener("click", descargarImagen);
 
   actualizarVista();
 });
