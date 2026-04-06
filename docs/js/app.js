@@ -69,7 +69,7 @@ async function capturarDocumento() {
   }
 
   return await html2canvas(elemento, {
-    scale: 2,
+    scale: 3,
     useCORS: true,
     backgroundColor: "#ffffff"
   });
@@ -86,28 +86,18 @@ async function generarPDF() {
     const canvas = await capturarDocumento();
     const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF("p", "mm", "a4");
+    // Convertimos el canvas a mm manteniendo proporción real
+    const pxToMm = 0.264583; // aprox 96dpi
+    const pdfWidth = canvas.width * pxToMm;
+    const pdfHeight = canvas.height * pxToMm;
 
-    const pageWidth = 210;
-    const pageHeight = 297;
+    const pdf = new jsPDF({
+      orientation: pdfWidth > pdfHeight ? "l" : "p",
+      unit: "mm",
+      format: [pdfWidth, pdfHeight]
+    });
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    let finalWidth = imgWidth;
-    let finalHeight = imgHeight;
-    let posX = 0;
-    let posY = 0;
-
-    if (imgHeight > pageHeight) {
-      finalHeight = pageHeight;
-      finalWidth = (canvas.width * finalHeight) / canvas.height;
-      posX = (pageWidth - finalWidth) / 2;
-    } else {
-      posY = (pageHeight - finalHeight) / 2;
-    }
-
-    pdf.addImage(imgData, "PNG", posX, posY, finalWidth, finalHeight);
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save(`${obtenerNombreBaseArchivo()}.pdf`);
   } catch (error) {
     console.error("Error al generar PDF:", error);
