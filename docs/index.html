@@ -5,8 +5,10 @@
   <title>Documentos Veterinarios</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="css/estilos.css?v=1.0.1">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilos.css?v=1.0.6">
 
+  <!-- LIBRERÍAS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -20,6 +22,8 @@
     </header>
 
     <main class="layout">
+
+      <!-- FORMULARIO -->
       <section class="panel formulario-panel">
         <h2>Formulario</h2>
 
@@ -44,36 +48,30 @@
         </div>
 
         <div class="botones">
-          <div class="botones-row">
-            <button id="btnPdf" class="btn btn-principal" type="button">
-              Descargar PDF
-            </button>
+          <button id="btnPdf" class="btn btn-principal" type="button">
+            Descargar PDF
+          </button>
 
-            <button id="btnImagen" class="btn btn-secundario" type="button">
-              Descargar imagen
-            </button>
-          </div>
+          <button id="btnImagen" class="btn btn-secundario" type="button">
+            Descargar imagen
+          </button>
 
-          <div class="botones-extra">
-            <button id="btnLimpiar" class="btn btn-secundario" type="button">
-              Limpiar
-            </button>
-
-            <label class="theme-switch" for="themeToggle" title="Cambiar tema">
-              <input type="checkbox" id="themeToggle">
-              <span class="theme-slider"></span>
-              <span class="theme-label">🌙</span>
-            </label>
-          </div>
+          <button id="btnLimpiar" class="btn btn-secundario" type="button">
+            Limpiar
+          </button>
         </div>
       </section>
 
+      <!-- VISTA PREVIA -->
       <section class="panel preview-panel">
         <div class="preview-wrap">
+
           <div class="documento" id="documento">
+
+            <!-- HEADER -->
             <div class="doc-header">
               <div class="doc-logo-box">
-                <img src="assets/logo.png?v=1.0.1" alt="Logo veterinaria" class="doc-logo">
+                <img src="assets/logo.png" alt="Logo veterinaria" class="doc-logo">
               </div>
 
               <div class="doc-header-info">
@@ -84,6 +82,7 @@
               </div>
             </div>
 
+            <!-- RP + FECHA -->
             <div class="doc-rp">
               <span class="rp-texto">Rp./</span>
 
@@ -92,25 +91,28 @@
               </span>
             </div>
 
+            <!-- DATOS -->
             <div class="doc-datos">
               <div class="dato">
                 <strong>Propietario:</strong>
-                <span id="doc-duenio">—</span>
+                <span id="doc-duenio"></span>
               </div>
 
               <div class="dato">
                 <strong>Mascota:</strong>
-                <span id="doc-mascota">—</span>
+                <span id="doc-mascota"></span>
               </div>
             </div>
 
+            <!-- DESCRIPCIÓN -->
             <div class="doc-seccion">
-              <p id="doc-diagnostico" class="con-marca">—</p>
+              <p id="doc-diagnostico" class="con-marca"></p>
             </div>
 
+            <!-- FIRMA -->
             <div class="doc-footer">
               <div class="firma-box">
-                <img src="assets/firma.png?v=1.0.1" alt="Firma" class="firma-img">
+                <img src="assets/firma.png" alt="Firma" class="firma-img">
                 <div class="linea-firma"></div>
 
                 <p class="firma-nombre">
@@ -122,18 +124,24 @@
               </div>
             </div>
 
+            <!-- CONTACTO -->
             <div class="doc-contacto">
-              <p><span>Av.&nbsp;Los&nbsp;Lirios&nbsp;10691</span><span>&nbsp;-&nbsp;</span><span>Itaembé&nbsp;Guazú</span></p>
-              <p><span>Posadas</span><span>&nbsp;-&nbsp;</span><span>Misiones</span></p>
-              <p><span>Tel:</span><span>&nbsp;(376)&nbsp;4319480</span></p>
-              <p><span>E-mail:</span><span>&nbsp;carolina.boede@hotmail.com</span></p>
+              <p>Av. Los Lirios 10691 - Itaembé Guazú</p>
+              <p>Posadas - Misiones</p>
+              <p>Tel: (376) 4319480</p>
+              <p>E-mail: carolina.boede@hotmail.com</p>
             </div>
+
           </div>
+
         </div>
       </section>
+
     </main>
   </div>
 
-  <script src="js/app.js?v=1.0.1"></script>
+  <!-- JS -->
+  <script src="js/app.js?v=1.0.6"></script>
+
 </body>
 </html>

@@ -61,80 +61,53 @@ function actualizarVista() {
   }
 }
 
-function esperarRender(ms = 120) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+async function capturarDocumento() {
+  const elemento = document.getElementById("documento");
 
-async function capturarDocumento(elemento = null) {
-  const objetivo = elemento || document.getElementById("documento");
-
-  if (!objetivo) {
+  if (!elemento) {
     throw new Error("No se encontró el elemento #documento");
   }
 
-  if (document.fonts && document.fonts.ready) {
-    await document.fonts.ready;
-  }
-
-  await esperarRender(80);
-
-  return await html2canvas(objetivo, {
+  return await html2canvas(elemento, {
     scale: 3,
     useCORS: true,
     backgroundColor: "#ffffff"
   });
 }
 
-async function capturarDocumentoEnModoClaro() {
-  const documento = document.getElementById("documento");
-
-  if (!documento) {
-    throw new Error("No se encontró el elemento #documento");
-  }
-
-  documento.classList.add("export-claro");
-
-  try {
-    const canvas = await capturarDocumento(documento);
-    return canvas;
-  } finally {
-    documento.classList.remove("export-claro");
-    await esperarRender(60);
-  }
-}
-
-
 async function generarPDF() {
-  const { jsPDF } = window.jspdf;
+  try {
+    if (!window.jspdf) {
+      alert("No se cargó la librería jsPDF.");
+      return;
+    }
 
-  const canvas = await capturarDocumentoEnModoClaro();
-  const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+    const canvas = await capturarDocumento();
+    const imgData = canvas.toDataURL("image/png");
 
-  const pdf = new jsPDF("p", "mm", "a4");
+    // Convertimos el canvas a mm manteniendo proporción real
+    const pxToMm = 0.264583; // aprox 96dpi
+    const pdfWidth = canvas.width * pxToMm;
+    const pdfHeight = canvas.height * pxToMm;
 
-  const pdfWidth = 210;
-  const pdfHeight = 297;
+    const pdf = new jsPDF({
+      orientation: pdfWidth > pdfHeight ? "l" : "p",
+      unit: "mm",
+      format: [pdfWidth, pdfHeight]
+    });
 
-  const imgWidth = pdfWidth;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-  let y = 0;
-
-  // Si es más alto que una página → cortar (opcional futuro)
-  if (imgHeight > pdfHeight) {
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-  } else {
-    // CENTRADO vertical (esto lo hace ver profesional)
-    y = (pdfHeight - imgHeight) / 2;
-    pdf.addImage(imgData, "PNG", 0, y, imgWidth, imgHeight);
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`${obtenerNombreBaseArchivo()}.pdf`);
+  } catch (error) {
+    console.error("Error al generar PDF:", error);
+    alert("Hubo un problema al generar el PDF.");
   }
-
-  pdf.save(obtenerNombreBaseArchivo() + ".pdf");
 }
 
 async function descargarImagen() {
   try {
-    const canvas = await capturarDocumentoEnModoClaro();
+    const canvas = await capturarDocumento();
     const link = document.createElement("a");
     link.download = `${obtenerNombreBaseArchivo()}.png`;
     link.href = canvas.toDataURL("image/png");
@@ -143,47 +116,6 @@ async function descargarImagen() {
     console.error("Error al descargar imagen:", error);
     alert("Hubo un problema al generar la imagen.");
   }
-}
-
-function limpiarFormulario() {
-  const confirmar = confirm("¿Querés limpiar todos los campos?");
-  if (!confirmar) return;
-
-  document.getElementById("fecha").value = "";
-  document.getElementById("duenio").value = "";
-  document.getElementById("mascota").value = "";
-  document.getElementById("diagnostico").value = "";
-
-  actualizarVista();
-}
-
-function aplicarTema(tema) {
-  const toggle = document.getElementById("themeToggle");
-  const label = document.querySelector(".theme-label");
-
-  if (tema === "dark") {
-    document.body.classList.add("dark");
-    if (toggle) toggle.checked = true;
-    if (label) label.textContent = "☀️";
-  } else {
-    document.body.classList.remove("dark");
-    if (toggle) toggle.checked = false;
-    if (label) label.textContent = "🌙";
-  }
-}
-
-function inicializarTema() {
-  const temaGuardado = localStorage.getItem("tema") || "light";
-  aplicarTema(temaGuardado);
-
-  const toggle = document.getElementById("themeToggle");
-  if (!toggle) return;
-
-  toggle.addEventListener("change", () => {
-    const nuevoTema = toggle.checked ? "dark" : "light";
-    localStorage.setItem("tema", nuevoTema);
-    aplicarTema(nuevoTema);
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -196,6 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnImagen = document.getElementById("btnImagen");
   const btnLimpiar = document.getElementById("btnLimpiar");
 
+  if (btnLimpiar) {
+    btnLimpiar.addEventListener("click", limpiarFormulario);
+  }
+
   if (btnPdf) {
     btnPdf.addEventListener("click", generarPDF);
   }
@@ -204,10 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
     btnImagen.addEventListener("click", descargarImagen);
   }
 
-  if (btnLimpiar) {
-    btnLimpiar.addEventListener("click", limpiarFormulario);
-  }
-
-  inicializarTema();
   actualizarVista();
 });
+
+function limpiarFormulario() {
+  const confirmar = confirm("¿Querés limpiar todos los campos?");
+  if (!confirmar) return;
+
+  document.getElementById("fecha").value = "";
+  document.getElementById("duenio").value = "";
+  document.getElementById("mascota").value = "";
+  document.getElementById("diagnostico").value = "";
+
+  actualizarVista();
+}
