@@ -290,26 +290,22 @@ body {
    ========================= */
 
 .doc-footer {
-  margin-top: 36px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.doc-footer {
   margin-top: 48px;
   display: flex;
   justify-content: flex-end;
+  padding-right: 24px;
 }
 
 .firma-box {
-  width: 190px;
+  width: 240px;
+  max-width: 240px;
   text-align: center;
 }
 
 .firma-img {
-  width: 95px;
+  width: 140px;
   display: block;
-  margin: 0 auto -2px;
+  margin: 0 auto -6px;
 }
 
 .linea-firma {
@@ -319,12 +315,37 @@ body {
 }
 
 .firma-box p {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   margin: 2px 0;
   color: #6f8f7d;
-  line-height: 1.35;
+  line-height: 1.3;
+  white-space: normal;
   word-break: normal;
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
+}
+
+.firma-nombre,
+.firma-matricula {
+  margin: 0;
+  color: #6f8f7d;
+  text-align: center;
+}
+
+.firma-nombre {
+  font-size: 0.82rem;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  word-spacing: 1px;
+}
+
+.firma-linea {
+  display: block;
+}
+
+.firma-matricula {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  line-height: 1.25;
 }
 
 /* =========================
@@ -512,19 +533,24 @@ body {
   }
 
   .doc-footer {
-    margin-top: 30px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: flex-end; /* 👈 derecha también en mobile */
+    padding-right: 16px; /* 👈 menos margen que desktop */
   }
 
   .firma-box {
-    width: 120px;
+    width: 200px;
+    max-width: 200px;
+    text-align: center;
   }
 
   .firma-img {
-    width: 100px;
+    width: 120px;
   }
 
   .linea-firma {
-    width: 95px;
+    width: 120px;
   }
 
   .firma-box p {
@@ -540,47 +566,6 @@ body {
     font-size: 0.75rem;
     line-height: 1.35;
   }
-}
-
-.firma-box {
-  width: 190px;
-  text-align: center;
-}
-
-.firma-img {
-  width: 95px;
-  display: block;
-  margin: 0 auto -2px;
-}
-
-.linea-firma {
-  width: 140px;
-  border-top: 2px solid #a9cdb7;
-  margin: 0 auto 8px;
-}
-
-.firma-nombre,
-.firma-matricula {
-  margin: 0;
-  color: #6f8f7d;
-  text-align: center;
-}
-
-.firma-nombre {
-  font-size: 0.82rem;
-  line-height: 1.25;
-  letter-spacing: 0.2px;
-  word-spacing: 1px;
-}
-
-.firma-linea {
-  display: block;
-}
-
-.firma-matricula {
-  margin-top: 4px;
-  font-size: 0.8rem;
-  line-height: 1.25;
 }
 
 @media (max-width: 480px) {
@@ -641,15 +626,20 @@ body {
   }
 
   .firma-box {
-    width: 110px;
+    width: 190px;
+    max-width: 190px;
   }
 
   .firma-img {
-    width: 88px;
+    width: 110px;
   }
 
   .linea-firma {
-    width: 85px;
+    width: 110px;
+  }
+
+  .firma-box p {
+    font-size: 0.78rem;
   }
 
   .doc-contacto p {
