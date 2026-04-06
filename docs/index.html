@@ -8,7 +8,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/estilos.css">
 
-  <!-- LIBRERÍAS (CLAVE para que funcione el PDF) -->
+  <!-- LIBRERÍAS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -29,13 +29,13 @@
         <h2>Formulario</h2>
 
         <div class="campo">
-          <label for="duenio">Nombre del tutor</label>
+          <label for="duenio">Nombre del Dueño</label>
           <input id="duenio" type="text" placeholder="Ej: María Gómez">
         </div>
 
         <div class="campo">
           <label for="mascota">Nombre de la mascota</label>
-          <input id="mascota" type="text" placeholder="Ej: Luna">
+          <input id="mascota" type="text" placeholder="Ej: Tannat">
         </div>
 
         <div class="campo">
@@ -77,21 +77,21 @@
 
               <div class="doc-header-info">
                 <h2>Clínica Veterinaria Dogtor Cat</h2>
-                <p>Dra. Boede Carolina</p>
-                <p>Matrícula Profesional XXXX</p>
-                <p>Tel. 376-4319480</p>
+                <p>Dra. Boede Carolina Paola</p>
+                <p>Médica Veterinaria</p>
+                <p>M.P. 481</p>
               </div>
             </div>
 
             <!-- TITULO -->
             <div class="doc-titulo">
-              <h3>Constancia / Documento veterinario</h3>
+              <h3>Rp./</h3>
             </div>
 
             <!-- DATOS -->
             <div class="doc-datos">
               <div class="dato">
-                <strong>Tutor:</strong> 
+                <strong>Dueño:</strong> 
                 <span id="doc-duenio">—</span>
               </div>
 
@@ -113,18 +113,25 @@
               <p id="doc-tratamiento">—</p>
             </div>
 
-            <!-- FIRMA -->
+            <!-- FIRMA + SELLO -->
             <div class="doc-footer">
               <div class="firma-box">
-                <img src="assets/firma.png" alt="Firma" class="firma-img">
                 <div class="linea-firma"></div>
-                <p>Dra. Boede Carolina</p>
-                <p>Matrícula XXXX</p>
+                <p>Dra. Boede Carolina Paola</p>
+                <p>M.P. 481</p>
               </div>
 
               <div class="sello-box">
                 <img src="assets/sello.png" alt="Sello" class="sello-img">
               </div>
+            </div>
+
+            <!-- DATOS DE CONTACTO ABAJO -->
+            <div class="doc-contacto">
+              <p>Av. Los Lirios 1069/1 - Itambé Guazú</p>
+              <p>Posadas - Misiones</p>
+              <p>Tel: (376) 154319480</p>
+              <p>E-mail: carolinaboede@hotmail.com</p>
             </div>
 
           </div>
