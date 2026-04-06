@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentos Veterinarios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- LIBRERÍAS (CLAVE para que funcione el PDF) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <h1>Generador de recetas y tratamientos</h1>
+      </div>
+    </header>
+
+    <main class="layout">
+
+      <!-- FORMULARIO -->
+      <section class="panel formulario-panel">
+        <h2>Formulario</h2>
+
+        <div class="campo">
+          <label for="duenio">Nombre del tutor</label>
+          <input id="duenio" type="text" placeholder="Ej: María Gómez">
+        </div>
+
+        <div class="campo">
+          <label for="mascota">Nombre de la mascota</label>
+          <input id="mascota" type="text" placeholder="Ej: Luna">
+        </div>
+
+        <div class="campo">
+          <label for="diagnostico">Diagnóstico</label>
+          <textarea id="diagnostico" placeholder="Escribí aquí el diagnóstico o motivo de consulta"></textarea>
+        </div>
+
+        <div class="campo">
+          <label for="tratamiento">Tratamiento</label>
+          <textarea id="tratamiento" placeholder="Escribí aquí el tratamiento o las indicaciones"></textarea>
+        </div>
+
+        <div class="botones">
+          <button id="btnPdf" class="btn btn-principal" type="button">
+            Descargar PDF
+          </button>
+
+          <button id="btnImagen" class="btn btn-secundario" type="button">
+            Descargar imagen
+          </button>
+
+          <button id="btnCompartir" class="btn btn-secundario" type="button">
+            Compartir (WhatsApp)
+          </button>
+        </div>
+      </section>
+
+      <!-- VISTA PREVIA -->
+      <section class="panel preview-panel">
+        <div class="preview-wrap">
+
+          <div class="documento" id="documento">
+
+            <!-- HEADER -->
+            <div class="doc-header">
+              <div class="doc-logo-box">
+                <img src="assets/logo.png" alt="Logo veterinaria" class="doc-logo">
+              </div>
+
+              <div class="doc-header-info">
+                <h2>Clínica Veterinaria Dogtor Cat</h2>
+                <p>Dra. Boede Carolina</p>
+                <p>Matrícula Profesional XXXX</p>
+                <p>Tel. 376-4319480</p>
+              </div>
+            </div>
+
+            <!-- TITULO -->
+            <div class="doc-titulo">
+              <h3>Constancia / Documento veterinario</h3>
+            </div>
+
+            <!-- DATOS -->
+            <div class="doc-datos">
+              <div class="dato">
+                <strong>Tutor:</strong> 
+                <span id="doc-duenio">—</span>
+              </div>
+
+              <div class="dato">
+                <strong>Mascota:</strong> 
+                <span id="doc-mascota">—</span>
+              </div>
+            </div>
+
+            <!-- DIAGNOSTICO -->
+            <div class="doc-seccion">
+              <h4>Diagnóstico</h4>
+              <p id="doc-diagnostico">—</p>
+            </div>
+
+            <!-- TRATAMIENTO -->
+            <div class="doc-seccion">
+              <h4>Tratamiento</h4>
+              <p id="doc-tratamiento">—</p>
+            </div>
+
+            <!-- FIRMA -->
+            <div class="doc-footer">
+              <div class="firma-box">
+                <img src="assets/firma.png" alt="Firma" class="firma-img">
+                <div class="linea-firma"></div>
+                <p>Dra. Boede Carolina</p>
+                <p>Matrícula XXXX</p>
+              </div>
+
+              <div class="sello-box">
+                <img src="assets/sello.png" alt="Sello" class="sello-img">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
