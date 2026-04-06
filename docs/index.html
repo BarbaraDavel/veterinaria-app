@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
   <div class="page">
     <header class="topbar">
       <div>
@@ -29,6 +28,11 @@
         <h2>Formulario</h2>
 
         <div class="campo">
+          <label for="fecha">Fecha</label>
+          <input id="fecha" type="date">
+        </div>
+
+        <div class="campo">
           <label for="duenio">Nombre del Dueño</label>
           <input id="duenio" type="text" placeholder="Ej: María Gómez">
         </div>
@@ -39,13 +43,8 @@
         </div>
 
         <div class="campo">
-          <label for="diagnostico">Diagnóstico</label>
-          <textarea id="diagnostico" placeholder="Escribí aquí el diagnóstico o motivo de consulta"></textarea>
-        </div>
-
-        <div class="campo">
-          <label for="tratamiento">Tratamiento</label>
-          <textarea id="tratamiento" placeholder="Escribí aquí el tratamiento o las indicaciones"></textarea>
+          <label for="diagnostico">Descripción</label>
+          <textarea id="diagnostico" placeholder="Escribí acá"></textarea>
         </div>
 
         <div class="botones">
@@ -57,13 +56,15 @@
             Descargar imagen
           </button>
 
+          <button id="btnLimpiar" class="btn btn-secundario" type="button">
+            Limpiar
+          </button>
         </div>
       </section>
 
       <!-- VISTA PREVIA -->
       <section class="panel preview-panel">
         <div class="preview-wrap">
-
           <div class="documento" id="documento">
 
             <!-- HEADER -->
@@ -77,6 +78,10 @@
                 <p>Dra. Boede Carolina Paola</p>
                 <p>Médica Veterinaria</p>
                 <p>M.P. 481</p>
+
+                <p class="doc-fecha">
+                  <span id="doc-fecha">____ / ____ / ____</span>
+                </p>
               </div>
             </div>
 
@@ -88,29 +93,22 @@
             <!-- DATOS -->
             <div class="doc-datos">
               <div class="dato">
-                <strong>Dueño:</strong> 
+                <strong>Dueño:</strong>
                 <span id="doc-duenio">—</span>
               </div>
 
               <div class="dato">
-                <strong>Mascota:</strong> 
+                <strong>Mascota:</strong>
                 <span id="doc-mascota">—</span>
               </div>
             </div>
 
-            <!-- DIAGNOSTICO -->
+            <!-- DESCRIPCION SIN TITULO -->
             <div class="doc-seccion">
-              <h4>Diagnóstico</h4>
-              <p id="doc-diagnostico">—</p>
+              <p id="doc-diagnostico" class="con-marca">—</p>
             </div>
 
-            <!-- TRATAMIENTO -->
-            <div class="doc-seccion">
-              <h4>Tratamiento</h4>
-              <p id="doc-tratamiento">—</p>
-            </div>
-
-            <!-- FIRMA + SELLO -->
+            <!-- FIRMA -->
             <div class="doc-footer">
               <div class="firma-box">
                 <img src="assets/firma.png" alt="Firma" class="firma-img">
@@ -129,15 +127,12 @@
             </div>
 
           </div>
-
         </div>
       </section>
 
     </main>
   </div>
 
-  <!-- JS -->
   <script src="js/app.js"></script>
-
 </body>
 </html>

@@ -26,16 +26,23 @@ function obtenerNombreBaseArchivo() {
   return `documento-veterinario-${nombreLimpio}-${obtenerFechaArchivo()}`;
 }
 
+function formatearFecha(valor) {
+  if (!valor) return "____ / ____ / ____";
+  const [anio, mes, dia] = valor.split("-");
+  if (!anio || !mes || !dia) return "____ / ____ / ____";
+  return `${dia}/${mes}/${anio}`;
+}
+
 function actualizarVista() {
   const duenioInput = document.getElementById("duenio");
   const mascotaInput = document.getElementById("mascota");
-  const diagnosticoInput = document.getElementById("diagnostico");
-  const tratamientoInput = document.getElementById("tratamiento");
+  const descripcionInput = document.getElementById("diagnostico");
+  const fechaInput = document.getElementById("fecha");
 
   const docDuenio = document.getElementById("doc-duenio");
   const docMascota = document.getElementById("doc-mascota");
-  const docDiagnostico = document.getElementById("doc-diagnostico");
-  const docTratamiento = document.getElementById("doc-tratamiento");
+  const docDescripcion = document.getElementById("doc-diagnostico");
+  const docFecha = document.getElementById("doc-fecha");
 
   if (duenioInput && docDuenio) {
     docDuenio.innerText = textoOPlaceholder(duenioInput.value);
@@ -45,12 +52,12 @@ function actualizarVista() {
     docMascota.innerText = textoOPlaceholder(mascotaInput.value);
   }
 
-  if (diagnosticoInput && docDiagnostico) {
-    docDiagnostico.innerText = textoOPlaceholder(diagnosticoInput.value);
+  if (descripcionInput && docDescripcion) {
+    docDescripcion.innerText = textoOPlaceholder(descripcionInput.value);
   }
 
-  if (tratamientoInput && docTratamiento) {
-    docTratamiento.innerText = textoOPlaceholder(tratamientoInput.value);
+  if (fechaInput && docFecha) {
+    docFecha.innerText = formatearFecha(fechaInput.value);
   }
 }
 
@@ -121,51 +128,19 @@ async function descargarImagen() {
   }
 }
 
-async function compartir() {
-  try {
-    const canvas = await capturarDocumento();
-
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
-        alert("No se pudo generar la imagen para compartir.");
-        return;
-      }
-
-      const archivo = new File(
-        [blob],
-        `${obtenerNombreBaseArchivo()}.png`,
-        { type: "image/png" }
-      );
-
-      if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
-        await navigator.share({
-          title: "Documento veterinario",
-          text: "Te envío el documento veterinario.",
-          files: [archivo]
-        });
-      } else {
-        alert(
-          "Tu dispositivo o navegador no permite compartir el archivo directamente. Se descargará la imagen."
-        );
-        const link = document.createElement("a");
-        link.download = archivo.name;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-      }
-    }, "image/png");
-  } catch (error) {
-    console.error("Error al compartir:", error);
-    alert("Hubo un problema al compartir el documento.");
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("input, textarea").forEach((el) => {
     el.addEventListener("input", actualizarVista);
+    el.addEventListener("change", actualizarVista);
   });
 
   const btnPdf = document.getElementById("btnPdf");
   const btnImagen = document.getElementById("btnImagen");
+  const btnLimpiar = document.getElementById("btnLimpiar");
+
+  if (btnLimpiar) {
+    btnLimpiar.addEventListener("click", limpiarFormulario);
+  }
 
   if (btnPdf) {
     btnPdf.addEventListener("click", generarPDF);
@@ -177,3 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   actualizarVista();
 });
+
+function limpiarFormulario() {
+  const confirmar = confirm("¿Querés limpiar todos los campos?");
+  if (!confirmar) return;
+
+  document.getElementById("fecha").value = "";
+  document.getElementById("duenio").value = "";
+  document.getElementById("mascota").value = "";
+  document.getElementById("diagnostico").value = "";
+
+  actualizarVista();
+}

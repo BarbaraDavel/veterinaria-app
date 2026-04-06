@@ -10,15 +10,11 @@
   --rosa-suave: #fbeaf1;
   --rosa-borde: #efc8d6;
   --blanco: #ffffff;
-  --crema: #fffdfc;
   --texto: #31443a;
   --texto-secundario: #6d7c73;
   --titulo: #3f6b52;
   --sombra: 0 12px 30px rgba(80, 120, 98, 0.12);
-  --sombra-hover: 0 14px 36px rgba(80, 120, 98, 0.18);
   --radio-xl: 24px;
-  --radio-lg: 18px;
-  --radio-md: 14px;
 }
 
 body {
@@ -37,24 +33,11 @@ body {
   padding: 30px 22px 40px;
 }
 
-/* ENCABEZADO GENERAL */
-.topbar {
-  margin-bottom: 26px;
-  padding: 8px 4px;
-}
-
+/* HEADER GENERAL */
 .topbar h1 {
-  margin: 0 0 8px;
+  margin: 0 0 20px;
   font-size: 2.1rem;
   color: var(--titulo);
-  letter-spacing: -0.4px;
-}
-
-.topbar p {
-  margin: 0;
-  color: var(--texto-secundario);
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
 /* LAYOUT */
@@ -62,138 +45,71 @@ body {
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 24px;
-  align-items: start;
 }
 
-/* TARJETAS GENERALES */
+/* TARJETAS */
 .panel {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.9);
   border-radius: var(--radio-xl);
   box-shadow: var(--sombra);
-  border: 1px solid rgba(185, 220, 197, 0.45);
-  transition: 0.2s ease;
-}
-
-.panel:hover {
-  box-shadow: var(--sombra-hover);
-}
-
-/* PANEL FORMULARIO */
-.formulario-panel {
   padding: 24px;
-  position: sticky;
-  top: 20px;
 }
 
-.formulario-panel h2 {
-  margin: 0 0 18px;
-  font-size: 1.5rem;
-  color: var(--titulo);
-}
-
+/* FORMULARIO */
 .campo {
   margin-bottom: 16px;
 }
 
 .campo label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
   font-weight: 700;
-  color: #4d6f5a;
+  font-size: 0.95rem;
 }
 
 .campo input,
-.campo textarea,
-.campo select {
+.campo textarea {
   width: 100%;
   border: 1px solid #d6eadc;
   border-radius: 16px;
-  padding: 13px 14px;
-  font-size: 0.97rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fbfffc 100%);
-  outline: none;
-  color: var(--texto);
-  transition: all 0.2s ease;
-}
-
-.campo input::placeholder,
-.campo textarea::placeholder {
-  color: #9aa9a0;
-}
-
-.campo input:focus,
-.campo textarea:focus,
-.campo select:focus {
-  border-color: #8dc0a1;
-  box-shadow: 0 0 0 4px rgba(127, 186, 148, 0.16);
+  padding: 12px;
 }
 
 .campo textarea {
   min-height: 120px;
-  resize: vertical;
-  line-height: 1.55;
 }
 
-/* BOTONES */
 .botones {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 22px;
 }
 
 .btn {
   border: none;
   border-radius: 16px;
   padding: 12px 18px;
-  font-size: 0.96rem;
-  font-weight: 700;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.18s ease;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
 }
 
 .btn-principal {
-  background: linear-gradient(135deg, var(--verde-principal), #79bf94);
+  background: var(--verde-principal);
   color: white;
-  box-shadow: 0 8px 18px rgba(95, 167, 123, 0.24);
-}
-
-.btn-principal:hover {
-  filter: brightness(1.03);
 }
 
 .btn-secundario {
-  background: linear-gradient(135deg, #f8d9e5, #f5e9ef);
+  background: var(--rosa-suave);
   color: #8d4f69;
-  border: 1px solid #efc8d6;
 }
 
-/* PANEL PREVIEW */
-.preview-panel {
-  padding: 24px;
-  overflow: auto;
-}
-
-.preview-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-/* HOJA */
+/* DOCUMENTO */
 .documento {
-  width: 794px;
+  width: 100%;
+  max-width: 900px; /* o 950px si querés más grande */
+  margin: 0 auto;
   min-height: 1123px;
-  background: linear-gradient(180deg, #ffffff 0%, #fffdfd 100%);
-  padding: 34px 52px 42px;
+  background: white;
+  padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 18px 35px rgba(94, 137, 110, 0.12);
-  border: 1px solid #edf5ef;
   position: relative;
 }
 
@@ -202,193 +118,85 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 10px;
-  border-radius: 16px 16px 0 0;
+  width: 100%;
   background: linear-gradient(90deg, var(--rosa-principal), var(--verde-principal));
 }
 
-/* HEADER */
+/* HEADER DOC */
 .doc-header {
   display: grid;
   grid-template-columns: 170px 1fr;
-  gap: 18px;
-  align-items: center;
-  padding: 10px 0 22px;
+  gap: 20px;
   border-bottom: 2px solid #e5f1e8;
-  margin-bottom: 28px;
-}
-
-.doc-logo-box {
-  width: 170px;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
+  padding-bottom: 20px;
 }
 
 .doc-logo {
-  max-width: 165px;
-  max-height: 105px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.doc-header-info h2 {
-  margin: 0 0 10px;
-  font-size: 2.05rem;
-  line-height: 1.1;
-  color: var(--titulo);
-  letter-spacing: -0.5px;
-}
-
-.doc-header-info p {
-  margin: 5px 0;
-  color: #61806d;
-  font-size: 1rem;
-  line-height: 1.4;
+  max-width: 150px;
 }
 
 /* TITULO */
 .doc-titulo {
-  margin-top: 8px;
-  margin-bottom: 24px;
-}
-
-.doc-titulo h3 {
-  display: inline-block;
-  margin: 0;
-  font-size: 1.05rem;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  color: #9a5573;
-  background: linear-gradient(135deg, #fcecf2, #f4fbf6);
-  border: 1px solid #efd4df;
-  border-radius: 999px;
-  padding: 10px 18px;
+  margin: 20px 0;
 }
 
 /* DATOS */
 .doc-datos {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .dato {
-  font-size: 1rem;
-  background: linear-gradient(180deg, #fcfffd 0%, #f7fcf9 100%);
-  border: 1px solid #deeee3;
-  border-left: 6px solid #9fd0b1;
-  border-radius: 14px;
-  padding: 13px 16px;
-  line-height: 1.5;
+  margin-bottom: 10px;
+  background: #f5faf7;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.dato strong {
-  color: #49725b;
-}
-
-/* SECCIONES */
-.doc-seccion {
-  margin-bottom: 26px;
-}
-
-.doc-seccion h4 {
-  margin: 0 0 10px;
-  font-size: 0.98rem;
-  color: #8f5470;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
-
-.doc-seccion p {
-  margin: 0;
-  min-height: 95px;
-  line-height: 1.75;
-  background: linear-gradient(180deg, #fffefe 0%, #fefcfd 100%);
+/* DESCRIPCION */
+.con-marca {
+  position: relative;
+  min-height: 200px;
+  padding: 20px;
   border: 1px solid #f0e2e8;
   border-radius: 16px;
-  padding: 18px;
-  white-space: pre-wrap;
-  color: #42574b;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
-/* FOOTER */
+/* 🔥 MARCA DE AGUA */
+.con-marca::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/logo.png") no-repeat center;
+  background-size: 180px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* FIRMA */
 .doc-footer {
-  margin-top: 90px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-}
-
-.firma-box {
-  max-width: 300px;
-  text-align: left;
+  margin-top: 80px;
 }
 
 .firma-img {
   width: 180px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 0 -10px 0;
-  margin-bottom: -9px;
+  margin-bottom: -8px;
 }
 
 .linea-firma {
   width: 160px;
   border-top: 2px solid #a9cdb7;
-  margin-bottom: 3px;
-  
+  margin-bottom: 6px;
 }
 
-.firma-box p {
-  margin: 3px 0;
-  color: #5f7f6d;
-  line-height: 1.4;
-}
-
-.sello-box {
-  width: 140px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  text-align: right;
-  color: #5f7f6d;
-}
-
-.sello-img {
-  max-width: 128px;
-  max-height: 128px;
-  object-fit: contain;
-  opacity: 0.92;
-}
-
-/* CONTACTO ABAJO */
+/* CONTACTO */
 .doc-contacto {
-  width: 100%;
   margin-top: 40px;
-  padding-top: 18px;
+  padding-top: 20px;
   border-top: 2px solid #e5f1e8;
   text-align: center;
-  clear: both;
-}
-
-.doc-contacto p {
-  margin: 4px 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #6f8f7d;
-  line-height: 1.4;
 }
 
 /* RESPONSIVE */
@@ -396,241 +204,19 @@ body {
   .layout {
     grid-template-columns: 1fr;
   }
-
-  .formulario-panel {
-    position: static;
-  }
 }
 
-@media (max-width: 860px) {
-  .preview-panel {
-    padding: 14px;
-  }
-
-  .documento {
-    width: 794px;
-    padding: 34px 40px 40px;
-  }
-
-  .doc-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
-  }
-
-  .sello-box {
-    width: 100%;
-    justify-content: flex-start;
-    text-align: left;
-  }
-}
-
-/* =========================
-   DOCUMENTO DE EXPORTACIÓN
-   ========================= */
-
-.export-stage {
-  position: fixed;
-  left: -99999px;
-  top: 0;
-  width: 794px;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.documento-export {
-  width: 794px;
-  min-height: 1123px;
-  background: linear-gradient(180deg, #ffffff 0%, #fffdfd 100%);
-  padding: 34px 52px 42px;
-  border-radius: 16px;
-  border: 1px solid #edf5ef;
-  position: relative;
-  color: var(--texto);
-}
-
-.documento-export::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  border-radius: 16px 16px 0 0;
-  background: linear-gradient(90deg, var(--rosa-principal), var(--verde-principal));
-}
-
-.documento-export .doc-header {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  gap: 18px;
-  align-items: center;
-  padding: 10px 0 22px;
-  border-bottom: 2px solid #e5f1e8;
-  margin-bottom: 28px;
-}
-
-.documento-export .doc-logo-box {
-  width: 170px;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
-}
-
-.documento-export .doc-logo {
-  max-width: 165px;
-  max-height: 105px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.documento-export .doc-header-info h2 {
-  margin: 0 0 10px;
-  font-size: 2.05rem;
-  line-height: 1.1;
-  color: var(--titulo);
-  letter-spacing: -0.5px;
-}
-
-.documento-export .doc-header-info p {
-  margin: 5px 0;
-  color: #61806d;
+.doc-fecha {
+  margin-top: 14px;
   font-size: 1rem;
-  line-height: 1.4;
-}
-
-.documento-export .doc-titulo {
-  margin-top: 8px;
-  margin-bottom: 24px;
-}
-
-.documento-export .doc-titulo h3 {
-  display: inline-block;
-  margin: 0;
-  font-size: 1.05rem;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  color: #9a5573;
-  background: linear-gradient(135deg, #fcecf2, #f4fbf6);
-  border: 1px solid #efd4df;
-  border-radius: 999px;
-  padding: 10px 18px;
-}
-
-.documento-export .doc-datos {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-.documento-export .dato {
-  font-size: 1rem;
-  background: linear-gradient(180deg, #fcfffd 0%, #f7fcf9 100%);
-  border: 1px solid #deeee3;
-  border-left: 6px solid #9fd0b1;
-  border-radius: 14px;
-  padding: 13px 16px;
-  line-height: 1.5;
-}
-
-.documento-export .dato strong {
-  color: #49725b;
-}
-
-.documento-export .doc-seccion {
-  margin-bottom: 26px;
-}
-
-.documento-export .doc-seccion h4 {
-  margin: 0 0 10px;
-  font-size: 0.98rem;
-  color: #8f5470;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
-
-.documento-export .doc-seccion p {
-  margin: 0;
-  min-height: 95px;
-  line-height: 1.75;
-  background: linear-gradient(180deg, #fffefe 0%, #fefcfd 100%);
-  border: 1px solid #f0e2e8;
-  border-radius: 16px;
-  padding: 18px;
-  white-space: pre-wrap;
-  color: #42574b;
-}
-
-.documento-export .doc-footer {
-  margin-top: 90px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-}
-
-.documento-export .firma-box {
-  max-width: 300px;
-  text-align: left;
-}
-
-.documento-export .firma-img {
-  width: 180px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 0 -10px 0;
-}
-
-.documento-export .linea-firma {
-  width: 160px;
-  border-top: 2px solid #a9cdb7;
-  margin-bottom: 10px;
-}
-
-.documento-export .firma-box p {
-  margin: 3px 0;
-  color: #5f7f6d;
-  line-height: 1.4;
-}
-
-.documento-export .sello-box {
-  width: 140px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  text-align: right;
-  color: #5f7f6d;
-}
-
-.documento-export .sello-img {
-  max-width: 128px;
-  max-height: 128px;
-  object-fit: contain;
-  opacity: 0.92;
-}
-
-.documento-export .doc-contacto {
-  width: 100%;
-  margin-top: 40px;
-  padding-top: 18px;
-  border-top: 2px solid #e5f1e8;
-  text-align: center;
-  clear: both;
-}
-
-.documento-export .doc-contacto p {
-  margin: 4px 0;
-  font-size: 0.95rem;
   color: #6f8f7d;
-  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.btn-secundario {
+  background: #f5e9ef;
+}
+
+#btnLimpiar {
+  opacity: 0.8;
 }
