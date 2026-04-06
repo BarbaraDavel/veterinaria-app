@@ -356,16 +356,20 @@ body {
    ========================= */
 
 .doc-contacto {
-  margin-top: 20px;
-  padding-top: 12px;
-  border-top: 2px solid #e5f1e8;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 2px solid var(--borde-doc);
   text-align: center;
 }
 
 .doc-contacto p {
-  font-size: 0.78rem;
-  margin: 3px 0;
-  color: #6f8f7d;
+  margin: 2px 0;
+  font-size: 0.8rem;
+  color: var(--texto-secundario);
+  line-height: 1.35;
+  white-space: normal;
+  letter-spacing: normal;
+  word-spacing: normal;
 }
 
 /* =========================
@@ -657,3 +661,4 @@ body {
     font-size: 0.72rem;
   }
 }
+
