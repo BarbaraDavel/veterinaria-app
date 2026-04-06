@@ -165,15 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const btnPdf = document.getElementById("btnPdf");
-  const btnCompartir = document.getElementById("btnCompartir");
   const btnImagen = document.getElementById("btnImagen");
 
   if (btnPdf) {
     btnPdf.addEventListener("click", generarPDF);
-  }
-
-  if (btnCompartir) {
-    btnCompartir.addEventListener("click", compartir);
   }
 
   if (btnImagen) {
