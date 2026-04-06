@@ -32,7 +32,7 @@ body {
 .page {
   max-width: 1380px;
   margin: 0 auto;
-  padding: 30px 22px 40px;
+  padding: 30px 22px 20px;
 }
 
 /* =========================
@@ -393,6 +393,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.2;
     margin-bottom: 16px;
+    text-align: center;
   }
 
   .panel {
